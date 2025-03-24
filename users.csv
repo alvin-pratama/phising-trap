@@ -1,0 +1,2 @@
+id,name,email,email_verified_at,password,remember_token,created_at,updated_at
+1,Admin User,admin@example.com,,$2y$12$4f3AgU6X2QljKxETh92s1enyFKHV26TmAlv4dr9ACMzEC501W668e,,2025-03-10 06:10:13,2025-03-10 06:10:13

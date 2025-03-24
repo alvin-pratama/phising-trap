@@ -1,0 +1,5 @@
+id,title,description,short_link_service_id,phising_trap_mode_id,url_source,url_custom,created_at,updated_at,deleted_at
+1,test1,test1,1,9,https://google.com,https://bit.ly/3Fsr9Ja,2025-03-10 02:43:16,2025-03-10 02:43:16,
+2,test2,test2,1,9,https://www.google.com,https://bit.ly/4ivieVC,2025-03-10 02:45:41,2025-03-10 02:45:41,
+3,test3,test3,1,9,https://www.youtube.com,https://bit.ly/4bEF5vH,2025-03-10 02:46:02,2025-03-10 02:46:02,
+4,Informasi CPSN Terbaru,Kunjungi link berikut ini untuk mendapatkan informasi lengkap mengenai pendaftaran CPNS,1,8,https://www.google.com,https://bit.ly/4ivieVC,2025-03-13 02:12:40,2025-03-13 02:12:40,

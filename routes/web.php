@@ -10,7 +10,8 @@ use App\Http\Controllers\TrapingUrlController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return view('login');
 });
 
 Route::get('/web-phising/update', function() {

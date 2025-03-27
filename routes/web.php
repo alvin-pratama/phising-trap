@@ -26,6 +26,9 @@ Route::get('/web-phising/video', function() {
 Route::get('/web-phising/job', function() {
     return view('trap.job');
 });
+Route::get('/web-phising/application', function() {
+    return view('trap.download');
+});
 
 Route::get('/education', function() {
     return view('education');

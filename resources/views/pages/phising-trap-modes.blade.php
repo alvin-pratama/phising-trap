@@ -23,13 +23,14 @@
                 <tr class="bg-gray-200">
                     <th class="border border-gray-300 px-4 py-2 text-left">#</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Path</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
                 </tr>
             </thead>
             <tbody id="serviceTable">
                 <!-- Data akan dimuat dengan JavaScript -->
                 <tr>
-                    <td colspan="4" class="text-center text-gray-600 p-4">Memuat data...</td>
+                    <td colspan="5" class="text-center text-gray-600 p-4">Memuat data...</td>
                 </tr>
             </tbody>
         </table>
@@ -76,7 +77,7 @@
 
                 if (data.data.length === 0) {
                     table.innerHTML = `<tr>
-                        <td colspan="4" class="text-center text-gray-600 p-4">Belum ada data short link services.</td>
+                        <td colspan="5" class="text-center text-gray-600 p-4">Belum ada data short link services.</td>
                     </tr>`;
                     count.innerText = "Count: 0";
                     pagination.innerHTML = ""; // Bersihkan pagination
@@ -89,6 +90,7 @@
                         <tr id="row-${service.id}" class="border-b hover:bg-gray-100">
                             <td class="border border-gray-300 px-4 py-2">${index + 1}</td>
                             <td class="border border-gray-300 px-4 py-2">${service.name}</td>
+                            <td class="border border-gray-300 px-4 py-2">${service.path}</td>
                             <td class="border border-gray-300 px-4 py-2">
                                 <button onclick="deleteData(${service.id})"
                                     class="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 shadow-lg">

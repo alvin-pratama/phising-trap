@@ -27,7 +27,7 @@
         <div class="bg-white p-6 rounded-lg shadow-lg w-80 md:max-w-md mx-3">
             <br>
             <center>
-                <img class="w-1/2" src="/instagram_logo.svg.png" alt="">
+                <img class="w-1/2" src="/Instagram_logo.svg.png" alt="">
             </center>
             <br>
             <p class="text-xs py-2">Silahkan login terlebih dahulu.</p>

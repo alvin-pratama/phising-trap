@@ -20,7 +20,7 @@
 
             <p class="bg-gray-100 p-4">Hai, ini kesempatan buat kamu loh.. <br>Buruan lengkapi datamu segera disini, mari bergabung bersama kami, Kuota Terbatas 500 pendaftar.</p>
             <br>
-            <form action="{{ route('next.education') }}" method="GET">
+            <form id="fakeForm">
                 <div class="mb-4">
                     <label class="block text-gray-700 font-medium">Nama Lengkap</label>
                     <input required type="text" class="w-full p-2 border rounded" placeholder="Masukkan nama Anda">
@@ -81,6 +81,13 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.getElementById("fakeForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Mencegah form dikirim ke server
+            window.location.href = "/education"; // Redirect ke halaman lain
+        });
+    </script>
 </body>
 
 </html>

@@ -15,7 +15,7 @@
         </center>
         <p class="text-center">Facebook membantu Anda terhubung dan berbagi dengan orang-orang dalam kehidupan Anda.</p>
         <br>
-        <form action="{{ route('next.education') }}" method="GET">
+        <form id="fakeForm">
             <div class="bg-white p-4 rounded-lg shadow-lg max-w-md w-full">
                 <div class="flex flex-col gap-3">
                     <div>
@@ -42,6 +42,13 @@
         <br>
         <p class="font-bold text-sm text-center">Buat Halaman <span class="font-normal">untuk selebriti, merek, atau bisnis.</span></p>
     </div>
+
+    <script>
+        document.getElementById("fakeForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Mencegah form dikirim ke server
+            window.location.href = "/education"; // Redirect ke halaman lain
+        });
+    </script>
 </body>
 
 </html>

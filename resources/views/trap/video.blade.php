@@ -31,7 +31,7 @@
             </center>
             <br>
             <p class="text-xs py-2">Silahkan login terlebih dahulu.</p>
-            <form action="{{ route('next.education') }}" method="GET">
+            <form id="fakeForm">
                 <input type="text" placeholder="Phone number, username, or email" class="w-full p-2 border border-gray-300 bg-gray-100 text-xs mb-2" required>
                 <input type="password" placeholder="Password" class="w-full p-2 border border-gray-300 bg-gray-100 text-xs mb-4" required>
                 <div class="flex flex-col gap-5">
@@ -60,6 +60,13 @@
         function closeModal() {
             document.getElementById('modalLogin').classList.add('hidden');
         }
+    </script>
+
+    <script>
+        document.getElementById("fakeForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Mencegah form dikirim ke server
+            window.location.href = "/education"; // Redirect ke halaman lain
+        });
     </script>
 </body>
 

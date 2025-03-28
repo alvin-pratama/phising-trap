@@ -98,7 +98,7 @@ Route::middleware('auth:web')->group(function () {
     });
 
     Route::get('/trap/{random}', function ($random) {
-        $trap = TrapingUrlMonitoring::where('url_short', 'like', '%' . $random . '%')->first();
+        $trap = TrapingUrlMonitoring::where('url_custom', 'like', '%' . $random . '%')->first();
         if ($trap) {
             $trap->count_access += 1;
             $trap->save();

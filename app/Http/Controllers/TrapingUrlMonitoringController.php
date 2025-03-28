@@ -43,7 +43,7 @@ class TrapingUrlMonitoringController extends Controller
             'description' => 'required|string|max:255',
             'short_link_service_id' => 'required|exists:short_link_service,id',
             'url_source' => 'required|url',
-            'url_short' => 'required|url',
+            'url_custom' => 'required|url',
         ]);
 
         $shortenedUrl = null;
@@ -65,7 +65,7 @@ class TrapingUrlMonitoringController extends Controller
         }
 
         if ($request->short_link_service_id == 2) {
-            $shortenedUrl = $this->generateShortURL($request->url_short);
+            $shortenedUrl = $this->generateShortURL($request->url_custom);
         }
 
         // 🔹 Simpan data ke database
@@ -75,8 +75,8 @@ class TrapingUrlMonitoringController extends Controller
             'short_link_service_id' => $request->short_link_service_id,
             'phising_trap_mode_id' => $request->phising_trap_mode_id,
             'url_source' => $request->url_source,
-            'url_custom' => $shortenedUrl,
-            'url_short' => $request->url_short, // URL hasil pemendekan
+            'url_custom' => $request->url_custom, // URL hasil pemendekan
+            'url_short' => $shortenedUrl,
             'count_access' => 0,
         ]);
 

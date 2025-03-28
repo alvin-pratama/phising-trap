@@ -26,9 +26,9 @@
                     <th class="border border-gray-300 px-4 py-2 text-left">Title</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Description</th>
                     <th class="border border-gray-300 px-4 py-2 text-left hidden">Source URL</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Random URL</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Shortened URL</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Count Access</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">URL</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left hidden">Shortened URL</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Counting Access Trap</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
                 </tr>
             </thead>
@@ -83,7 +83,7 @@
                         <span class="text-gray-700">Custom URL</span>
                         <span class="text-sm bg-blue-600 text-white px-2 py-1 rounded shadow-md hover:bg-blue-700 cursor-pointer" onclick="generateRandomURL()">Generate Random URL</span>
                     </div>
-                    <input type="url" id="url_short" class="w-full border px-3 py-2 rounded mt-1 bg-gray-200" readonly placeholder="click generate random url button" required>
+                    <input type="url" id="url_custom" class="w-full border px-3 py-2 rounded mt-1 bg-gray-200" readonly placeholder="click generate random url button" required>
                 </label>
                 <div class="flex justify-end mt-4">
                     <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Cancel</button>
@@ -125,11 +125,23 @@
                     table.innerHTML += `
                     <tr id="row-${item.id}" class="border-b hover:bg-gray-100">
                         <td class="border border-gray-300 px-4 py-2">${index + 1}</td>
-                        <td class="border border-gray-300 px-4 py-2">${item.title}</td>
-                        <td class="border border-gray-300 px-4 py-2">${item.description}</td>
+                        <td class="border border-gray-300 px-4 py-2 text-sm">${item.title}</td>
+                        <td class="border border-gray-300 px-4 py-2 text-sm">${item.description}</td>
                         <td class="border border-gray-300 px-4 py-2 hidden">${item.url_source}</td>
-                        <td class="border border-gray-300 px-4 py-2">${item.url_short}</td>
-                        <td class="border border-gray-300 px-4 py-2">${item.url_custom}</td>
+                        <td class="border border-gray-300 px-4 py-2">
+                            <div class="flex flex-col text-sm">
+                                <div>
+                                    Redirect: ${item.url_custom}
+                                </div>
+                                <div>
+                                    ShortLink Trap: ${item.url_short}
+                                </div>
+                                <div class="text-xs text-gray-600">
+                                    Dibuat: ${formatDate(item.created_at)}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="border border-gray-300 px-4 py-2" hidden>${item.url_custom}</td>
                         <td class="border border-gray-300 px-4 py-2">${item.count_access}</td>
                         <td class="border border-gray-300 px-4 py-2">
                             <button onclick="deleteData(${item.id})"
@@ -180,8 +192,8 @@
 
         const fullUrl = baseUrl + randomString;
 
-        // set to documment.getElementById("url_short").value
-        document.getElementById("url_short").value = fullUrl; // Set nilai ke input
+        // set to documment.getElementById("url_custom").value
+        document.getElementById("url_custom").value = fullUrl; // Set nilai ke input
     }
 
     function change() {
@@ -217,7 +229,7 @@
 
         const url_source = document.getElementById("url_source").value;
 
-        const url_short = document.getElementById("url_short").value;
+        const url_custom = document.getElementById("url_custom").value;
 
         fetch("/traping-urls-monitoring", {
                 method: "POST",
@@ -231,7 +243,7 @@
                     short_link_service_id,
                     phising_trap_mode_id,
                     url_source,
-                    url_short,
+                    url_custom,
                 })
             })
             .then(response => response.json())
@@ -268,6 +280,20 @@
                 }
             })
             .catch(error => console.error("Error:", error));
+    }
+
+    function formatDate(isoDate) {
+        const date = new Date(isoDate);
+
+        // Opsi format dalam bahasa Indonesia
+        const options = { 
+            weekday: 'long', 
+            day: '2-digit', 
+            month: 'long', 
+            year: 'numeric' 
+        };
+
+        return new Intl.DateTimeFormat('id-ID', options).format(date);
     }
 </script>
 @endsection

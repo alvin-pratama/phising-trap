@@ -41,23 +41,25 @@
 </div>
 
 <!-- Modal Add Service -->
-<div id="addModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 class="text-xl font-semibold text-gray-800">Tambah Short Link Service</h2>
+<div id="addModal" class="hidden">
+    <div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 class="text-xl font-semibold text-gray-800">Tambah Short Link Service</h2>
 
-        <!-- Form Input -->
-        <div class="mt-4">
-            <label class="block text-gray-700">Service Name</label>
-            <input type="text" id="service_name" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring" placeholder="Masukkan nama service">
+            <!-- Form Input -->
+            <div class="mt-4">
+                <label class="block text-gray-700">Service Name</label>
+                <input type="text" id="service_name" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring" placeholder="Masukkan nama service">
 
-            <label class="block text-gray-700 mt-3">Function</label>
-            <input type="text" id="func" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring" placeholder="Masukkan fungsi service">
-        </div>
+                <label class="block text-gray-700 mt-3">Function</label>
+                <input type="text" id="func" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring" placeholder="Masukkan fungsi service">
+            </div>
 
-        <!-- Tombol Submit -->
-        <div class="mt-4 flex justify-end space-x-2">
-            <button onclick="closeAddModal()" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button>
-            <button onclick="addService()" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>
+            <!-- Tombol Submit -->
+            <div class="mt-4 flex justify-end space-x-2">
+                <button onclick="closeAddModal()" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button>
+                <button onclick="addService()" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>
+            </div>
         </div>
     </div>
 </div>

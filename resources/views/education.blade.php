@@ -131,18 +131,18 @@
         </div>
     </div>
 
-   <!-- Modal -->
+    <!-- Modal -->
     <div id="modal" class="hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center p-4">
-             <div class="bg-white rounded-lg relative max-w-full max-h-full w-auto overflow-y-auto">
-                 <!-- Tombol Close -->
-                 <button onclick="closeModal()" class="sticky top-2 right-2 bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-700 ml-auto">
-                     &times;
-                 </button>
-                 <!-- Gambar Zoom -->
-                 <img id="modal-image" src="" alt="" class="max-w-full max-h-screen object-contain">
-             </div>
-         </div>
+            <div class="bg-white rounded-lg relative max-w-full max-h-full w-auto overflow-y-auto">
+                <!-- Tombol Close -->
+                <button onclick="closeModal()" class="sticky top-2 right-2 bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-700 ml-auto">
+                    &times;
+                </button>
+                <!-- Gambar Zoom -->
+                <img id="modal-image" src="" alt="" class="max-w-full max-h-screen object-contain">
+            </div>
+        </div>
     </div>
 
     <script>

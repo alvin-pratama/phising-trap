@@ -7,6 +7,7 @@
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
 </head>
 
 <body class="flex justify-center items-center min-h-screen bg-gray-100">

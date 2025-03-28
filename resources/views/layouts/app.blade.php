@@ -17,7 +17,7 @@
             :class="open ? 'translate-x-0' : '-translate-x-full'"
             class="fixed md:relative w-64 bg-gray-900 text-white p-5 h-screen md:h-auto md:min-h-screen transition-transform duration-300 ease-in-out md:translate-x-0 flex flex-col">
 
-            <h2 class="text-xl font-bold mb-5">Phising Trap</h2>
+            <h2 class="text-xl font-bold mb-5">Phistrap</h2>
             <ul class="flex-1">
                 <li class="my-2">
                     <a href="{{ route('dashboard') }}"

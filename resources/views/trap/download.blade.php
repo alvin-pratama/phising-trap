@@ -24,7 +24,7 @@
             }, 1000);
         });
     </script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/tailwind.js"></script>
 </head>
 <body class="flex items-center justify-center h-screen bg-gray-100">
     <div class="bg-white p-6 rounded-lg shadow-md text-center">

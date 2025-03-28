@@ -7,7 +7,7 @@ use Shivella\Bitly\Facade\Bitly;
 
 use App\Http\Controllers\ShortLinkMasterController;
 use App\Http\Controllers\TrapingUrlController;
-
+use App\Http\Controllers\TrapingUrlMonitoringController;
 
 Route::get('/', function () {
     // return view('welcome');
@@ -90,10 +90,35 @@ Route::middleware('auth:web')->group(function () {
         Route::post('/', [TrapingUrlController::class, 'store']); // Tambah data
         Route::delete('/{id}', [TrapingUrlController::class, 'destroy']); // Hapus data
     });
+    
+    Route::prefix('traping-urls-monitoring')->group(function () {
+        Route::get('/', [TrapingUrlMonitoringController::class, 'index'])->name('traping-urls-monitoring');  // Pagination
+        Route::get('/all', [TrapingUrlMonitoringController::class, 'getAll']); // Semua data
+        Route::post('/', [TrapingUrlMonitoringController::class, 'store']); // Tambah data
+        Route::delete('/{id}', [TrapingUrlMonitoringController::class, 'destroy']); // Hapus data
+    });
+
+    Route::get('/trap/{random}', function($random) {
+        return $random;
+    });
 });
 
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Http;
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/test-tinyurl', function() {
+    $longUrl = 'http://localhost:8000/trap/ti1k1teeazpc8krxr4wkcv';
+    $response = Http::get("https://tinyurl.com/api-create.php", [
+        'url' => $longUrl
+    ]);
+
+    if ($response->successful()) {
+        return $response->body(); // Mengembalikan URL pendek
+    }
+
+    return null; // Jika gagal
+});

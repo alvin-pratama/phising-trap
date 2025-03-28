@@ -3,8 +3,8 @@
 @section('title', 'Traping URL')
 
 @section('content')
-<h1 class="text-2xl font-bold">Traping URL Default</h1>
-<p class="mt-2 text-gray-700">Atur konfigurasi sistem di sini.</p>
+<h1 class="text-2xl font-bold">Traping URL Monitoring</h1>
+<p class="mt-2 text-gray-700">Atur konfigurasi sistem untuk monitoring di sini.</p>
 
 <!-- Card -->
 <div class="bg-white shadow-md rounded-lg mt-6 p-6">
@@ -13,8 +13,8 @@
 
     <!-- Button Add -->
     <button onclick="openModal()"
-        class="my-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 shadow-lg hidden">
-        + Add
+        class="my-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 shadow-lg">
+        + Add & Generate Trap
     </button>
 
     <!-- Table Wrapper -->
@@ -26,8 +26,10 @@
                     <th class="border border-gray-300 px-4 py-2 text-left">Title</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Description</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Source URL</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Random URL</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Shortened URL</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left hidden">Action</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Count Access</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
                 </tr>
             </thead>
             <tbody id="trapingTable">
@@ -46,20 +48,20 @@
 <!-- Modal Add Traping URL -->
 <div id="modalAdd" class="hidden">
     <div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full md:max-w-xl">
             <h2 class="text-xl font-semibold text-gray-800">Tambah Traping URL</h2>
             <form id="addForm">
                 <label class="block mt-4">
                     <span class="text-gray-700">Title</span>
-                    <input type="text" id="title" class="w-full border px-3 py-2 rounded mt-1">
+                    <input type="text" id="title" class="w-full border px-3 py-2 rounded mt-1" placeholder="target" required>
                 </label>
                 <label class="block mt-4">
                     <span class="text-gray-700">Description</span>
-                    <textarea id="description" class="w-full border px-3 py-2 rounded mt-1"></textarea>
+                    <textarea id="description" class="w-full border px-3 py-2 rounded mt-1" required></textarea>
                 </label>
                 <label class="block mt-4">
                     <span class="text-gray-700">Phising Trap Mode</span>
-                    <select id="ptm" class="w-full border px-3 py-2 rounded mt-1" onchange="change()">
+                    <select id="ptm" class="w-full border px-3 py-2 rounded mt-1" onchange="change()" required>
                         <option value=''>- choose one -</option>
                         @foreach ($ptm as $item)
                         <option value='{{ json_encode(["id" => $item->id, "path" => $item->path]) }}'>{{$item->name}}</option>
@@ -67,14 +69,21 @@
                     </select>
                 </label>
                 <label class="block mt-4">
+                    <span class="text-gray-700">Source URL</span>
+                    <input type="url" id="url_source" class="w-full border px-3 py-2 rounded mt-1 bg-gray-200" readonly placeholder="select phising trap mode" required>
+                </label>
+                <label class="block mt-4">
                     <span class="text-gray-700">Short Link Service</span>
-                    <select id="short_link_service_id" class="w-full border px-3 py-2 rounded mt-1">
+                    <select id="short_link_service_id" class="w-full border px-3 py-2 rounded mt-1" required>
                         <!-- Options akan dimuat melalui JavaScript -->
                     </select>
                 </label>
                 <label class="block mt-4">
-                    <span class="text-gray-700">Source URL</span>
-                    <input type="url" id="url_source" class="w-full border px-3 py-2 rounded mt-1">
+                    <div class="flex flex-row gap-2 items-center">
+                        <span class="text-gray-700">Custom URL</span>
+                        <span class="text-sm bg-blue-600 text-white px-2 py-1 rounded shadow-md hover:bg-blue-700 cursor-pointer" onclick="generateRandomURL()">Generate Random URL</span>
+                    </div>
+                    <input type="url" id="url_short" class="w-full border px-3 py-2 rounded mt-1 bg-gray-200" readonly placeholder="click generate random url button" required>
                 </label>
                 <div class="flex justify-end mt-4">
                     <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Cancel</button>
@@ -93,7 +102,7 @@
     });
 
     function loadData(page = 1) {
-        fetch(`/traping-urls/all?page=${page}`)
+        fetch(`/traping-urls-monitoring/all?page=${page}`)
             .then(response => response.json())
             .then(data => {
                 let table = document.getElementById("trapingTable");
@@ -119,8 +128,10 @@
                         <td class="border border-gray-300 px-4 py-2">${item.title}</td>
                         <td class="border border-gray-300 px-4 py-2">${item.description}</td>
                         <td class="border border-gray-300 px-4 py-2">${item.url_source}</td>
+                        <td class="border border-gray-300 px-4 py-2">${item.url_short}</td>
                         <td class="border border-gray-300 px-4 py-2">${item.url_custom}</td>
-                        <td class="border border-gray-300 px-4 py-2 hidden">
+                        <td class="border border-gray-300 px-4 py-2">${item.count_access}</td>
+                        <td class="border border-gray-300 px-4 py-2">
                             <button onclick="deleteData(${item.id})"
                                 class="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 shadow-lg">
                                 Delete
@@ -161,6 +172,18 @@
         document.getElementById("modalAdd").classList.remove("hidden");
     }
 
+    function generateRandomURL() {
+        // example: http://localhost:8000/trap/f0n2384gfn3fg4mu0smrec8fhm3ifhmsjkg4tu
+        const baseUrl = window.location.origin + "/trap/";
+        const randomString = Math.random().toString(36).substring(2, 15) +
+            Math.random().toString(36).substring(2, 15); // Generate string acak
+
+        const fullUrl = baseUrl + randomString;
+
+        // set to documment.getElementById("url_short").value
+        document.getElementById("url_short").value = fullUrl; // Set nilai ke input
+    }
+
     function change() {
         const select = document.getElementById("ptm");
         const selectedValue = select.value ? JSON.parse(select.value) : null;
@@ -185,7 +208,7 @@
         const short_link_service_id = document.getElementById("short_link_service_id").value;
         const selectValue = document.getElementById("ptm").value; // Ambil value langsung
         const selectedValue = selectValue ? JSON.parse(selectValue) : null; // Parse JSON jika ada isinya
-
+        
         let phising_trap_mode_id = null;
         if (selectedValue) {
             phising_trap_mode_id = selectedValue.id;
@@ -193,13 +216,10 @@
         }
 
         const url_source = document.getElementById("url_source").value;
-        // console.log(url_source);
-        // return;
+        
+        const url_short = document.getElementById("url_short").value;
 
-        // console.log(description)
-        // return
-
-        fetch("/traping-urls", {
+        fetch("/traping-urls-monitoring", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -210,7 +230,8 @@
                     description,
                     short_link_service_id,
                     phising_trap_mode_id,
-                    url_source
+                    url_source,
+                    url_short,
                 })
             })
             .then(response => response.json())
@@ -230,7 +251,7 @@
     function deleteData(id) {
         if (!confirm("Apakah Anda yakin ingin menghapus data ini?")) return;
 
-        fetch(`/traping-urls/${id}`, {
+        fetch(`/traping-urls-monitoring/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

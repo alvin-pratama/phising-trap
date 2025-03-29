@@ -97,15 +97,16 @@ Route::middleware('auth:web')->group(function () {
         Route::delete('/{id}', [TrapingUrlMonitoringController::class, 'destroy']); // Hapus data
     });
 
-    Route::get('/trap/{random}', function ($random) {
-        $trap = TrapingUrlMonitoring::where('url_custom', 'like', '%' . $random . '%')->first();
-        if ($trap) {
-            $trap->count_access += 1;
-            $trap->save();
-            return redirect()->to($trap->url_source); // Redirect ke URL asli
-        }
-        return abort(404); // Jika tidak ditemukan, tampilkan halaman 404
-    });
+});
+
+Route::get('/trap/{random}', function ($random) {
+    $trap = TrapingUrlMonitoring::where('url_custom', 'like', '%' . $random . '%')->first();
+    if ($trap) {
+        $trap->count_access += 1;
+        $trap->save();
+        return redirect()->to($trap->url_source); // Redirect ke URL asli
+    }
+    return abort(404); // Jika tidak ditemukan, tampilkan halaman 404
 });
 
 use App\Http\Controllers\AuthController;

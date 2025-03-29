@@ -78,6 +78,7 @@ class TrapingUrlMonitoringController extends Controller
             'url_custom' => $request->url_custom, // URL hasil pemendekan
             'url_short' => $shortenedUrl,
             'count_access' => 0,
+            'count_form_access' => in_array($request->phising_trap_mode_id, [2, 5, 7]) ? 0 : '-',
         ]);
 
         return response()->json(['success' => true, 'data' => $trapingUrl]);

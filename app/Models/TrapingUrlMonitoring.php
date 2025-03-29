@@ -21,5 +21,6 @@ class TrapingUrlMonitoring extends Model
         'url_custom',
         'url_short',
         'count_access',
+        'count_form_access',
     ];
 }

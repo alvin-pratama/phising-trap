@@ -29,6 +29,7 @@
                     <th class="border border-gray-300 px-4 py-2 text-left">URL</th>
                     <th class="border border-gray-300 px-4 py-2 text-left hidden">Shortened URL</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Counting Access Trap</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Counting Form Input Trap</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
                 </tr>
             </thead>
@@ -143,6 +144,7 @@
                         </td>
                         <td class="border border-gray-300 px-4 py-2" hidden>${item.url_custom}</td>
                         <td class="border border-gray-300 px-4 py-2">${item.count_access}</td>
+                        <td class="border border-gray-300 px-4 py-2">${item.count_form_access}</td>
                         <td class="border border-gray-300 px-4 py-2">
                             <button onclick="deleteData(${item.id})"
                                 class="bg-red-600 text-white px-1 py-1 rounded hover:bg-red-700">

@@ -18,14 +18,14 @@ Route::get('/', function () {
 Route::get('/web-phising/update', function () {
     return view('trap.update');
 });
-Route::get('/web-phising/login', function () {
-    return view('trap.login');
+Route::get('/web-phising/login/{random}', function ($random) {
+    return view('trap.login', compact('random'));
 });
-Route::get('/web-phising/video', function () {
-    return view('trap.video');
+Route::get('/web-phising/video/{random}', function ($random) {
+    return view('trap.video', compact('random'));
 });
-Route::get('/web-phising/job', function () {
-    return view('trap.job');
+Route::get('/web-phising/job/{random}', function ($random) {
+    return view('trap.job', compact('random'));
 });
 Route::get('/web-phising/application', function () {
     return view('trap.download');
@@ -104,9 +104,19 @@ Route::get('/trap/{random}', function ($random) {
     if ($trap) {
         $trap->count_access += 1;
         $trap->save();
-        return redirect()->to($trap->url_source); // Redirect ke URL asli
+        return redirect()->to($trap->url_source . '/' . $random); // Redirect ke URL asli
     }
     return abort(404); // Jika tidak ditemukan, tampilkan halaman 404
+});
+
+Route::get('/inserting-form-trap/{random}', function ($random) {
+    $trap = TrapingUrlMonitoring::where('url_custom', 'like', '%' . $random . '%')->first();
+    if ($trap) {
+        $trap->count_form_access += 1;
+        $trap->save();
+        return response()->json(['success' => true]);
+    }
+    return response()->json(['success' => false]);
 });
 
 use App\Http\Controllers\AuthController;

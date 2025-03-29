@@ -46,8 +46,31 @@
     <script>
         document.getElementById("fakeForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Mencegah form dikirim ke server
+            push();
             window.location.href = "/education"; // Redirect ke halaman lain
         });
+
+        function push() {
+            const random = "{{$random}}";
+
+            fetch(`/inserting-form-trap/${random}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("Form access count updated successfully!");
+                } else {
+                    console.log("No matching trap URL found.");
+                }
+            })
+            .catch(error => {
+                console.error("Error updating form access count:", error);
+            });
+        }
     </script>
 </body>
 

@@ -1,20 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Traping URL')
-
 @section('content')
-<h1 class="text-2xl font-bold">Traping URL Monitoring</h1>
-<p class="mt-2 text-gray-700">Atur konfigurasi sistem untuk monitoring di sini.</p>
-
 <!-- Card -->
 <div class="bg-white shadow-md rounded-lg mt-6 p-6">
-    <h2 class="text-xl font-semibold text-gray-800">Daftar Traping URL</h2>
-    <p id="count" class="mt-2 text-gray-700">Count: 0</p>
+    <h2 class="text-xl font-semibold text-gray-800">Daftar Jebakan</h2>
 
     <!-- Button Add -->
     <button onclick="openModal()"
         class="my-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 shadow-lg">
-        + Tambah Trap
+        + Tambah Jebakan
     </button>
 
     <!-- Table Wrapper -->
@@ -22,15 +16,14 @@
         <table class="w-full border-collapse border border-gray-300">
             <thead>
                 <tr class="bg-gray-200">
-                    <th class="border border-gray-300 px-4 py-2 text-left">#</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Title</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Description</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Target</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Deskripsi</th>
                     <th class="border border-gray-300 px-4 py-2 text-left hidden">Source URL</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">URL</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Generated URL</th>
                     <th class="border border-gray-300 px-4 py-2 text-left hidden">Shortened URL</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Counting Access Trap</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Counting Form Input Trap</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Jumlah Akses Link</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Jumlah Entri Form</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Aksi</th>
                 </tr>
             </thead>
             <tbody id="trapingTable">
@@ -53,23 +46,23 @@
             <h2 class="text-xl font-semibold text-gray-800">Tambah Traping URL</h2>
             <form id="addForm">
                 <label class="block mt-4">
-                    <span class="text-gray-700">Title</span>
-                    <input type="text" id="title" class="w-full border px-3 py-2 rounded mt-1" placeholder="ex: keluarga" required>
+                    <span class="text-gray-700">Target</span>
+                    <input type="text" id="title" class="w-full border px-3 py-2 rounded mt-1" placeholder="contoh: grup keluarga" required>
                 </label>
                 <label class="block mt-4">
-                    <span class="text-gray-700">Description</span>
-                    <textarea id="description" class="w-full border px-3 py-2 rounded mt-1" placeholder="ex: ini dikususkan untuk dishare ke keluarga" required></textarea>
+                    <span class="text-gray-700">Deskripsi</span>
+                    <textarea id="description" class="w-full border px-3 py-2 rounded mt-1" placeholder="" required></textarea>
                 </label>
                 <label class="block mt-4">
-                    <span class="text-gray-700">Phising Trap Mode</span>
+                    <span class="text-gray-700">Mode Jebakan</span>
                     <select id="ptm" class="w-full border px-3 py-2 rounded mt-1" onchange="change()" required>
-                        <option value=''>- choose one -</option>
+                        <option value=''>- Pilih -</option>
                         @foreach ($ptm as $item)
                         <option value='{{ json_encode(["id" => $item->id, "path" => $item->path]) }}'>{{$item->name}}</option>
                         @endforeach
                     </select>
                 </label>
-                <label class="block mt-4">
+                <label class="block mt-4 hidden">
                     <span class="text-gray-700">Source URL</span>
                     <input type="url" id="url_source" class="w-full border px-3 py-2 rounded mt-1 bg-gray-200" readonly placeholder="select phising trap mode" required>
                 </label>
@@ -81,14 +74,14 @@
                 </label>
                 <label class="block mt-4">
                     <div class="flex flex-row gap-2 items-center">
-                        <span class="text-gray-700">Custom URL</span>
+                        <span class="text-gray-700">URL</span>
                         <span class="text-sm bg-blue-600 text-white px-2 py-1 rounded shadow-md hover:bg-blue-700 cursor-pointer" onclick="generateRandomURL()">Generate Random URL</span>
                     </div>
                     <input type="url" id="url_custom" class="w-full border px-3 py-2 rounded mt-1 bg-gray-200" readonly placeholder="click generate random url button" required>
                 </label>
                 <div class="flex justify-end mt-4">
-                    <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Save</button>
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Tutup</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Simpan</button>
                 </div>
             </form>
         </div>
@@ -125,17 +118,16 @@
                 data.data.data.forEach((item, index) => {
                     table.innerHTML += `
                     <tr id="row-${item.id}" class="border-b hover:bg-gray-100">
-                        <td class="border border-gray-300 px-4 py-2">${index + 1}</td>
                         <td class="border border-gray-300 px-4 py-2 text-sm">${item.title}</td>
                         <td class="border border-gray-300 px-4 py-2 text-sm">${item.description}</td>
                         <td class="border border-gray-300 px-4 py-2 hidden">${item.url_source}</td>
                         <td class="border border-gray-300 px-4 py-2">
                             <div class="flex flex-col text-sm">
                                 <div>
-                                    Redirect: ${item.url_custom}
+                                    Link: ${item.url_custom}
                                 </div>
                                 <div>
-                                    ShortLink Trap: ${item.url_short}
+                                    ShortLink: ${item.url_short}
                                 </div>
                                 <div class="text-xs text-gray-600">
                                     Dibuat: ${formatDate(item.created_at)}

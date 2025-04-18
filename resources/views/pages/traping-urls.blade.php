@@ -1,15 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Traping URL')
-
 @section('content')
-<h1 class="text-2xl font-bold">Traping URL Default</h1>
-<p class="mt-2 text-gray-700">Atur konfigurasi sistem di sini.</p>
-
 <!-- Card -->
 <div class="bg-white shadow-md rounded-lg mt-6 p-6">
-    <h2 class="text-xl font-semibold text-gray-800">Daftar Traping URL</h2>
-    <p id="count" class="mt-2 text-gray-700">Count: 0</p>
+    <h2 class="text-xl font-semibold text-gray-800">Mode Jebakan</h2>
 
     <!-- Button Add -->
     <button onclick="openModal()"
@@ -23,11 +17,9 @@
             <thead>
                 <tr class="bg-gray-200">
                     <th class="border border-gray-300 px-4 py-2 text-left">#</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Title</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Description</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Source URL</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Shortened URL</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left hidden">Action</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Mode</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Deskripsi</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Halaman</th>
                 </tr>
             </thead>
             <tbody id="trapingTable">
@@ -119,13 +111,6 @@
                         <td class="border border-gray-300 px-4 py-2">${item.title}</td>
                         <td class="border border-gray-300 px-4 py-2">${item.description}</td>
                         <td class="border border-gray-300 px-4 py-2">${item.url_source}</td>
-                        <td class="border border-gray-300 px-4 py-2">${item.url_custom}</td>
-                        <td class="border border-gray-300 px-4 py-2 hidden">
-                            <button onclick="deleteData(${item.id})"
-                                class="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 shadow-lg">
-                                Delete
-                            </button>
-                        </td>
                     </tr>`;
                 });
 

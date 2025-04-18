@@ -18,13 +18,13 @@
             :class="open ? 'translate-x-0' : '-translate-x-full'"
             class="fixed md:relative w-64 bg-gray-900 text-white p-5 h-screen md:h-auto md:min-h-screen transition-transform duration-300 ease-in-out md:translate-x-0 flex flex-col">
 
-            <h2 class="text-xl font-bold mb-5">Phistrap</h2>
+            <h2 class="text-xl font-bold mb-5">PhisTrap</h2>
             <ul class="flex-1">
                 <li class="my-2">
                     <a href="{{ route('dashboard') }}"
                         class="flex items-center gap-2 py-2 px-4 hover:bg-gray-500 rounded {{ request()->routeIs('dashboard') ? 'bg-gray-700' : 'bg-gray-900' }}">
                         <svg width="18px" height="18px" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M55.64 22.751H35.09C34.5596 22.751 34.0509 22.9617 33.6758 23.3368C33.3007 23.7118 33.09 24.2205 33.09 24.751V55.571C33.0916 56.1009 33.3028 56.6087 33.6775 56.9834C34.0523 57.3582 34.5601 57.5694 35.09 57.571H55.64C56.1699 57.5694 56.6777 57.3582 57.0525 56.9834C57.4272 56.6087 57.6384 56.1009 57.64 55.571V24.751C57.64 24.2205 57.4293 23.7118 57.0542 23.3368C56.6791 22.9617 56.1704 22.751 55.64 22.751Z" fill="#999999"></path> <path d="M55.64 5.62695H35.09C34.5596 5.62695 34.0509 5.83767 33.6758 6.21274C33.3007 6.58781 33.09 7.09652 33.09 7.62695V17.8969C33.0916 18.4269 33.3028 18.9347 33.6775 19.3094C34.0523 19.6841 34.5601 19.8954 35.09 19.8969H55.64C56.1699 19.8954 56.6777 19.6841 57.0525 19.3094C57.4272 18.9347 57.6384 18.4269 57.64 17.8969V7.62695C57.64 7.09652 57.4293 6.58781 57.0542 6.21274C56.6791 5.83767 56.1704 5.62695 55.64 5.62695Z" fill="#fff"></path> <path d="M28.24 36.451H7.7C6.59543 36.451 5.7 37.3465 5.7 38.451V55.5711C5.7 56.6756 6.59543 57.5711 7.7 57.5711H28.24C29.3446 57.5711 30.24 56.6756 30.24 55.5711V38.451C30.24 37.3465 29.3446 36.451 28.24 36.451Z" fill="#fff"></path> <path d="M28.24 5.62697H7.70002C7.43712 5.62604 7.17661 5.67714 6.93355 5.77733C6.69048 5.87751 6.46964 6.02477 6.28373 6.21068C6.09783 6.39658 5.95054 6.61742 5.85035 6.86049C5.75017 7.10355 5.6991 7.36406 5.70002 7.62697V31.557C5.70002 32.0874 5.91074 32.5961 6.28581 32.9712C6.66088 33.3462 7.16959 33.557 7.70002 33.557H28.24C28.7704 33.557 29.2791 33.3462 29.6542 32.9712C30.0293 32.5961 30.24 32.0874 30.24 31.557V7.62697C30.2409 7.36406 30.1898 7.10355 30.0896 6.86049C29.9895 6.61742 29.8422 6.39658 29.6563 6.21068C29.4704 6.02477 29.2495 5.87751 29.0065 5.77733C28.7634 5.67714 28.5029 5.62604 28.24 5.62697Z" fill="#999999"></path> </g></svg>
-                        Dashboard
+                        Beranda
                     </a>
                 </li>
                 <p class="text-gray-500 hidden">Master</p>
@@ -43,13 +43,13 @@
                         Phising Trap Modes
                     </a>
                 </li>
-                <p class="text-gray-500">Data</p>
+                <p class="text-gray-500">Jebakan</p>
                 <li class="my-2">
                     <a href="{{ route('traping-urls') }}"
                         class="flex items-center gap-2 py-2 px-4 hover:bg-gray-500 rounded {{ request()->routeIs('traping-urls') ? 'bg-gray-700' : 'bg-gray-900' }}">
                         <!-- <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M21 7.52V13.4C21 13.74 20.67 13.98 20.35 13.88L16.42 12.66C15.34 12.33 14.18 12.61 13.39 13.4C12.59 14.2 12.3 15.37 12.64 16.45L13.85 20.35C13.95 20.67 13.71 21 13.37 21H7.52C4.07 21 2 18.94 2 15.48V7.52C2 4.06 4.07 2 7.52 2H15.48C18.93 2 21 4.06 21 7.52Z" fill="#fff"></path> <path d="M21.9597 18.8385L20.3297 19.3885C19.8797 19.5385 19.5197 19.8885 19.3697 20.3485L18.8197 21.9785C18.3497 23.3885 16.3697 23.3585 15.9297 21.9485L14.0797 15.9985C13.7197 14.8185 14.8097 13.7185 15.9797 14.0885L21.9397 15.9385C23.3397 16.3785 23.3597 18.3685 21.9597 18.8385Z" fill="#fff"></path> </g></svg> -->
                         <svg width="18px" height="18px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#fff" d="M246.253 280.552l71.99 97.834-166.207 48.293zm.274-37.243L138.877 97.006 21 279.83l107.65 146.3 114.21-177.108zm162.63 9.728l34.46-53.457-38.665 11.226v33.426zm-115.097-2.12l-10.515-4.89-18.56 5.388-7.17 11.126 77.33 105.143 31.99-49.628-20.28-42.88zm45.55-88.33h65.405v27.44l44.9-13.06L342.254 30.566 154.83 85.02l107.712 146.39 77.055-22.45v-46.373zm45.45 86.06v-66.105h-25.507v49.49l-13.533-5.1-34.012 10.277 49.89 22.937 104.62 221.287 24.482-7.11z"></path></g></svg>
-                        Traping Default
+                        Mode Jebakan
                     </a>
                 </li>
                 <li class="my-2">
@@ -57,7 +57,7 @@
                         class="flex items-center gap-2 py-2 px-4 hover:bg-gray-500 rounded {{ request()->routeIs('traping-urls-monitoring') ? 'bg-gray-700' : 'bg-gray-900' }}">
                         <!-- <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M21 7.52V13.4C21 13.74 20.67 13.98 20.35 13.88L16.42 12.66C15.34 12.33 14.18 12.61 13.39 13.4C12.59 14.2 12.3 15.37 12.64 16.45L13.85 20.35C13.95 20.67 13.71 21 13.37 21H7.52C4.07 21 2 18.94 2 15.48V7.52C2 4.06 4.07 2 7.52 2H15.48C18.93 2 21 4.06 21 7.52Z" fill="#fff"></path> <path d="M21.9597 18.8385L20.3297 19.3885C19.8797 19.5385 19.5197 19.8885 19.3697 20.3485L18.8197 21.9785C18.3497 23.3885 16.3697 23.3585 15.9297 21.9485L14.0797 15.9985C13.7197 14.8185 14.8097 13.7185 15.9797 14.0885L21.9397 15.9385C23.3397 16.3785 23.3597 18.3685 21.9597 18.8385Z" fill="#fff"></path> </g></svg> -->
                         <svg width="18px" height="18px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#fff" d="M246.253 280.552l71.99 97.834-166.207 48.293zm.274-37.243L138.877 97.006 21 279.83l107.65 146.3 114.21-177.108zm162.63 9.728l34.46-53.457-38.665 11.226v33.426zm-115.097-2.12l-10.515-4.89-18.56 5.388-7.17 11.126 77.33 105.143 31.99-49.628-20.28-42.88zm45.55-88.33h65.405v27.44l44.9-13.06L342.254 30.566 154.83 85.02l107.712 146.39 77.055-22.45v-46.373zm45.45 86.06v-66.105h-25.507v49.49l-13.533-5.1-34.012 10.277 49.89 22.937 104.62 221.287 24.482-7.11z"></path></g></svg>
-                        Traping Monitoring
+                        Kelola Jebakan
                     </a>
                 </li>
             </ul>
@@ -76,7 +76,7 @@
                 </button>
 
                 <div class="flex items-center gap-2">
-                    <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM11.8284 6.75736C12.3807 6.75736 12.8284 7.20507 12.8284 7.75736V12.7245L16.3553 14.0653C16.8716 14.2615 17.131 14.8391 16.9347 15.3553C16.7385 15.8716 16.1609 16.131 15.6447 15.9347L11.4731 14.349C11.085 14.2014 10.8284 13.8294 10.8284 13.4142V7.75736C10.8284 7.20507 11.2761 6.75736 11.8284 6.75736Z" fill="#999999"></path> </g></svg>
+                    <!-- <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM11.8284 6.75736C12.3807 6.75736 12.8284 7.20507 12.8284 7.75736V12.7245L16.3553 14.0653C16.8716 14.2615 17.131 14.8391 16.9347 15.3553C16.7385 15.8716 16.1609 16.131 15.6447 15.9347L11.4731 14.349C11.085 14.2014 10.8284 13.8294 10.8284 13.4142V7.75736C10.8284 7.20507 11.2761 6.75736 11.8284 6.75736Z" fill="#999999"></path> </g></svg> -->
                     <!-- Real-time Clock -->
                     <div x-data="{ time: '' }" x-init="setInterval(() => {
                         let now = new Date();
@@ -91,7 +91,7 @@
                             hour12: false
                         }).format(now);
                     }, 1000)">
-                        <span class="text-lg font-semibold text-gray-700" x-text="time"></span>
+                        <!-- <span class="text-lg font-semibold text-gray-700" x-text="time"></span> -->
                     </div>
                 </div>
 
@@ -104,7 +104,7 @@
                         <!-- <img src="https://i.pravatar.cc/40" alt="User Avatar" class="w-8 h-8 rounded-full"> -->
                         
                         <!-- Nama User (Hanya tampil di layar Desktop) -->
-                        <span class="text-gray-700 font-medium hidden md:block">{{ Auth::user()->email }}</span>
+                        <span class="text-gray-700 font-medium hidden md:block">Admin</span>
                     </button>
 
                     <!-- Dropdown Menu -->

@@ -3,9 +3,6 @@
 @section('title', 'Phising Trap Modes')
 
 @section('content')
-<h1 class="text-2xl font-bold">Phising Trap Modes</h1>
-<p class="mt-2 text-gray-700">Atur konfigurasi sistem di sini.</p>
-
 <!-- Card -->
 <div class="bg-white shadow-md rounded-lg mt-6 p-6">
     <h2 class="text-xl font-semibold text-gray-800">Daftar Phising Trap Modes</h2>

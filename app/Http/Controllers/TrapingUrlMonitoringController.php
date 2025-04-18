@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PhisingTrapMode;
 use App\Models\ShortLinkMaster;
+use App\Models\Target;
 use App\Models\TrapingUrl;
 use App\Models\TrapingUrlMonitoring;
 use Illuminate\Http\Request;
@@ -11,15 +12,17 @@ use Illuminate\Support\Facades\Http;
 
 class TrapingUrlMonitoringController extends Controller
 {
-    public function index()
+    public function index($target_id)
     {
         $ptm = PhisingTrapMode::where('path', '!=', '-')->get();
-        return view('pages.traping-urls-monitoring', compact('ptm')); // Pastikan path sesuai dengan Blade yang digunakan
+        $target = Target::find($target_id);
+        $tum = TrapingUrlMonitoring::where('target_id', $target_id)->get();
+        return view('pages.traping-urls-monitoring', compact('ptm', 'target_id', 'target', 'tum')); // Pastikan path sesuai dengan Blade yang digunakan
     }
 
-    public function getAll()
+    public function getAll($target_id)
     {
-        $data = TrapingUrlMonitoring::paginate(10); // Ambil 10 data per halaman
+        $data = TrapingUrlMonitoring::where('target_id', $target_id)->paginate(10); // Ambil 10 data per halaman
 
         if ($data->isEmpty()) {
             return response()->json([
@@ -39,7 +42,8 @@ class TrapingUrlMonitoringController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'target_id' => 'required|string|max:255',
+            // 'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'short_link_service_id' => 'required|exists:short_link_service,id',
             'url_source' => 'required|url',
@@ -70,7 +74,8 @@ class TrapingUrlMonitoringController extends Controller
 
         // 🔹 Simpan data ke database
         $trapingUrl = TrapingUrlMonitoring::create([
-            'title' => $request->title,
+            'target_id' => $request->target_id,
+            'title' => '-',
             'description' => $request->description,
             'short_link_service_id' => $request->short_link_service_id,
             'phising_trap_mode_id' => $request->phising_trap_mode_id,

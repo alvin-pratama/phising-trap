@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('traping_url_monitoring', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('target_id');
             $table->string('title');
             $table->string('description');
             $table->integer('short_link_service_id');

@@ -13,6 +13,7 @@ class TrapingUrlMonitoring extends Model
     protected $table = "traping_url_monitoring";
     protected $primaryKey = 'id';
     protected $fillable = [
+        'target_id',
         'title',
         'description',
         'short_link_service_id',

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Shivella\Bitly\Facade\Bitly;
 
 use App\Http\Controllers\ShortLinkMasterController;
+use App\Http\Controllers\TargetController;
 use App\Http\Controllers\TrapingUrlController;
 use App\Http\Controllers\TrapingUrlMonitoringController;
 use App\Models\TrapingUrlMonitoring;
@@ -90,9 +91,18 @@ Route::middleware('auth:web')->group(function () {
         Route::delete('/{id}', [TrapingUrlController::class, 'destroy']); // Hapus data
     });
 
+    Route::prefix('targets')->group(function () {
+        Route::get('/', [TargetController::class, 'index'])->name('targets');  // Pagination
+        Route::get('/{id}', [TargetController::class, 'show']); // Semua data
+        Route::get('/by/all', [TargetController::class, 'getAll']); // Semua data
+        Route::post('/', [TargetController::class, 'store']); // Tambah data
+        Route::put('/{id}', [TargetController::class, 'put']); // Tambah data
+        Route::delete('/{id}', [TargetController::class, 'destroy']); // Hapus data
+    });
+
     Route::prefix('traping-urls-monitoring')->group(function () {
-        Route::get('/', [TrapingUrlMonitoringController::class, 'index'])->name('traping-urls-monitoring');  // Pagination
-        Route::get('/all', [TrapingUrlMonitoringController::class, 'getAll']); // Semua data
+        Route::get('/target/{target_id}', [TrapingUrlMonitoringController::class, 'index'])->name('traping-urls-monitoring');  // Pagination
+        Route::get('/all/{target_id}', [TrapingUrlMonitoringController::class, 'getAll']); // Semua data
         Route::post('/', [TrapingUrlMonitoringController::class, 'store']); // Tambah data
         Route::delete('/{id}', [TrapingUrlMonitoringController::class, 'destroy']); // Hapus data
     });

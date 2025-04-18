@@ -1,18 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Card 1 -->
+<!-- Card -->
 <div class="bg-white shadow-md rounded-lg mt-6 p-6">
     <h2 class="text-xl font-semibold text-gray-800">Daftar Jebakan</h2>
-    <p>Target: {{ $target->target }}</p>
     <p id="count" class="mt-2 text-gray-700">Count: 0</p>
 
     <!-- Button Add -->
-    <button onclick="history.back()"
-        class="my-3 bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 shadow-lg">
-        Kembali
-    </button>
-
     <button onclick="openModal()"
         class="my-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 shadow-lg">
         + Tambah Jebakan
@@ -23,7 +17,7 @@
         <table class="w-full border-collapse border border-gray-300">
             <thead>
                 <tr class="bg-gray-200">
-                    <th class="border border-gray-300 px-4 py-2 text-left hidden">Target</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Target</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Deskripsi</th>
                     <th class="border border-gray-300 px-4 py-2 text-left hidden">Source URL</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Generated URL</th>
@@ -46,25 +40,15 @@
     <div id="pagination" class="mt-4 flex justify-center space-x-2"></div>
 </div>
 
-<!-- Card 2 -->
-<div class="bg-white shadow-md rounded-lg mt-6 p-6">
-    <h2 class="text-xl font-semibold text-gray-800">Grafik Jebakan</h2>
-
-    <!-- <p>{{ $tum }}</p> -->
-    <div style="max-width: 100%; width: 90%; overflow-x: auto;">
-        <canvas id="myChart"></canvas>
-    </div>
-</div>
-
 <!-- Modal Add Traping URL -->
 <div id="modalAdd" class="hidden">
     <div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
         <div class="bg-white rounded-lg shadow-lg p-6 w-full md:max-w-xl">
             <h2 class="text-xl font-semibold text-gray-800">Tambah Traping URL</h2>
             <form id="addForm">
-                <label class="mt-4 hidden">
+                <label class="block mt-4">
                     <span class="text-gray-700">Target</span>
-                    <input type="text" id="title" class="w-full border px-3 py-2 rounded mt-1" placeholder="contoh: grup keluarga">
+                    <input type="text" id="title" class="w-full border px-3 py-2 rounded mt-1" placeholder="contoh: grup keluarga" required>
                 </label>
                 <label class="block mt-4">
                     <span class="text-gray-700">Deskripsi</span>
@@ -79,7 +63,7 @@
                         @endforeach
                     </select>
                 </label>
-                <label class="mt-4 hidden">
+                <label class="block mt-4 hidden">
                     <span class="text-gray-700">Source URL</span>
                     <input type="url" id="url_source" class="w-full border px-3 py-2 rounded mt-1 bg-gray-200" readonly placeholder="select phising trap mode" required>
                 </label>
@@ -113,7 +97,7 @@
     });
 
     function loadData(page = 1) {
-        fetch(`/traping-urls-monitoring/all/${'{{ $target_id }}'}?page=${page}`)
+        fetch(`/traping-urls-monitoring/all?page=${page}`)
             .then(response => response.json())
             .then(data => {
                 let table = document.getElementById("trapingTable");
@@ -135,7 +119,7 @@
                 data.data.data.forEach((item, index) => {
                     table.innerHTML += `
                     <tr id="row-${item.id}" class="border-b hover:bg-gray-100">
-                        <td class="border border-gray-300 px-4 py-2 text-sm hidden">${item.title}</td>
+                        <td class="border border-gray-300 px-4 py-2 text-sm">${item.title}</td>
                         <td class="border border-gray-300 px-4 py-2 text-sm">${item.description}</td>
                         <td class="border border-gray-300 px-4 py-2 hidden">${item.url_source}</td>
                         <td class="border border-gray-300 px-4 py-2">
@@ -198,9 +182,7 @@
 
     function generateRandomURL() {
         // example: http://localhost:8000/trap/f0n2384gfn3fg4mu0smrec8fhm3ifhmsjkg4tu
-        const url = 'https://phistrap.web.id'
-        // const url = window.location.origin
-        const baseUrl = url + "/trap/";
+        const baseUrl = window.location.origin + "/trap/";
         const randomString = Math.random().toString(36).substring(2, 15) +
             Math.random().toString(36).substring(2, 15); // Generate string acak
 
@@ -229,11 +211,7 @@
     document.getElementById("addForm").addEventListener("submit", function(event) {
         event.preventDefault();
 
-        const target_id = '{{ $target_id }}';
-        // console.log("target: "+target_id)
-        // return
-
-        // const title = document.getElementById("title").value;
+        const title = document.getElementById("title").value;
         const description = document.getElementById("description").value;
         const short_link_service_id = document.getElementById("short_link_service_id").value;
         const selectValue = document.getElementById("ptm").value; // Ambil value langsung
@@ -256,8 +234,7 @@
                     "X-CSRF-TOKEN": '{{ csrf_token() }}'
                 },
                 body: JSON.stringify({
-                    target_id,
-                    // title,
+                    title,
                     description,
                     short_link_service_id,
                     phising_trap_mode_id,
@@ -305,57 +282,14 @@
         const date = new Date(isoDate);
 
         // Opsi format dalam bahasa Indonesia
-        const options = {
-            weekday: 'long',
-            day: '2-digit',
-            month: 'long',
-            year: 'numeric'
+        const options = { 
+            weekday: 'long', 
+            day: '2-digit', 
+            month: 'long', 
+            year: 'numeric' 
         };
 
         return new Intl.DateTimeFormat('id-ID', options).format(date);
     }
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    // Ambil data dari Laravel (dikonversi ke format JS)
-    const tumData = @json($tum);
-
-    // Ambil label dan value dari data
-    const labels = tumData.map(item => formatDate(item.created_at));
-    const accessCounts = tumData.map(item => parseInt(item.count_access));
-    const formAccessCounts = tumData.map(item => parseInt(item.count_form_access));
-
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                    label: 'Jumlah Akses Link',
-                    data: accessCounts,
-                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                    borderColor: 'rgba(0, 0, 0, 1)',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Jumlah Entri Form',
-                    data: formAccessCounts,
-                    backgroundColor: 'rgba(255, 0, 0, 0.6)',
-                    borderColor: 'rgba(255, 0, 0, 1)',
-                    borderWidth: 1
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    stepSize: 10
-                }
-            }
-        }
-    });
 </script>
 @endsection

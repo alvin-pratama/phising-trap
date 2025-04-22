@@ -24,7 +24,7 @@
             <thead>
                 <tr class="bg-gray-200">
                     <th class="border border-gray-300 px-4 py-2 text-left hidden">Target</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Deskripsi</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Narasi</th>
                     <th class="border border-gray-300 px-4 py-2 text-left hidden">Source URL</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Generated URL</th>
                     <th class="border border-gray-300 px-4 py-2 text-left hidden">Shortened URL</th>
@@ -66,19 +66,6 @@
                     <span class="text-gray-700">Target</span>
                     <input type="text" id="title" class="w-full border px-3 py-2 rounded mt-1" placeholder="contoh: grup keluarga">
                 </label>
-                <label class="block mt-4">
-                    <span class="text-gray-700">Deskripsi</span>
-                    <textarea id="description" class="w-full border px-3 py-2 rounded mt-1" placeholder="" required></textarea>
-                </label>
-                <label class="block mt-4">
-                    <span class="text-gray-700">Mode Jebakan</span>
-                    <select id="ptm" class="w-full border px-3 py-2 rounded mt-1" onchange="change()" required>
-                        <option value=''>- Pilih -</option>
-                        @foreach ($ptm as $item)
-                        <option value='{{ json_encode(["id" => $item->id, "path" => $item->path]) }}'>{{$item->name}}</option>
-                        @endforeach
-                    </select>
-                </label>
                 <label class="mt-4 hidden">
                     <span class="text-gray-700">Source URL</span>
                     <input type="url" id="url_source" class="w-full border px-3 py-2 rounded mt-1 bg-gray-200" readonly placeholder="select phising trap mode" required>
@@ -95,6 +82,25 @@
                         <span class="text-sm bg-blue-600 text-white px-2 py-1 rounded shadow-md hover:bg-blue-700 cursor-pointer" onclick="generateRandomURL()">Generate Random URL</span>
                     </div>
                     <input type="url" id="url_custom" class="w-full border px-3 py-2 rounded mt-1 bg-gray-200" readonly placeholder="click generate random url button" required>
+                </label>
+                <label class="block mt-4">
+                    <span class="text-gray-700">Mode Jebakan</span>
+                    <select id="ptm" class="w-full border px-3 py-2 rounded mt-1" onchange="change()" required>
+                        <option value=''>- Pilih -</option>
+                        @foreach ($ptm as $item)
+                        <option value='{{ json_encode(["id" => $item->id, "path" => $item->path, "desc" => $item->desc]) }}'>{{$item->name}}</option>
+                        @endforeach
+                    </select>
+                </label>
+                <label class="block mt-4">
+                    <span class="text-gray-700">Pilih Kode Narasi</span>
+                    <select id="naration" class="w-full border px-3 py-2 rounded mt-1" onchange="change()" required>
+                        <option value=''>- Pilih -</option>
+                    </select>
+                </label>
+                <label class="block mt-4">
+                    <span class="text-gray-700">Narasi</span>
+                    <textarea id="description" class="w-full border px-3 py-2 rounded mt-1 bg-gray-100" placeholder="data masih kosong" required rows="10" readonly></textarea>
                 </label>
                 <div class="flex justify-end mt-4">
                     <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Tutup</button>
@@ -136,7 +142,15 @@
                     table.innerHTML += `
                     <tr id="row-${item.id}" class="border-b hover:bg-gray-100">
                         <td class="border border-gray-300 px-4 py-2 text-sm hidden">${item.title}</td>
-                        <td class="border border-gray-300 px-4 py-2 text-sm">${item.description}</td>
+                        <td class="border border-gray-300 px-4 py-2 text-sm" onclick="copyToClipboard(this)">
+                            <div>
+                                <span class="hover:bg-red-100">${item.description}</span>
+                                <button class="flex gap-1 bg-gray-200 p-2 rounded-md">
+                                    <!-- Ikon Copy -->
+                                    <svg fill="#7d7d7d" height="20px" width="20px" version="1.1" id="XMLID_154_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24.00 24.00" xml:space="preserve" stroke="#7d7d7d" stroke-width="0.00024000000000000003"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="copy"> <g> <path d="M19,24H1V4h4V0h12.4L23,5.6V20h-4V24z M3,22h14v-2H5V6H3V22z M7,18h14V8h-6V2H7V18z M17,6h3.6L17,2.4V6z M17,16H9v-2h8V16 z M19,12H9v-2h10V12z M13,8H9V6h4V8z"></path> </g> </g> </g></svg>
+                                </button>
+                            </div>
+                        </td>
                         <td class="border border-gray-300 px-4 py-2 hidden">${item.url_source}</td>
                         <td class="border border-gray-300 px-4 py-2">
                             <div class="flex flex-col text-sm">
@@ -216,11 +230,87 @@
         if (selectedValue) {
             console.log("ID:", selectedValue.id);
             console.log("Path:", selectedValue.path);
+            console.log("Desc:", selectedValue.desc);
         }
 
         const host = window.location.origin;
         document.getElementById("url_source").value = host + selectedValue.path;
+        // document.getElementById("description").innerHTML = selectedValue.desc;
+
+        const narationSelect = document.getElementById("naration");
+        narationSelect.innerHTML = ""; // Kosongkan dulu isi sebelumnya
+        // Tambahkan opsi default
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = "- Pilih -";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        narationSelect.appendChild(defaultOption);
+
+        const descData = typeof selectedValue.desc === "string" ? JSON.parse(selectedValue.desc) : selectedValue.desc;
+
+        if (descData.data && Array.isArray(descData.data)) {
+            // Isi berdasarkan data
+            descData.data.forEach(item => {
+                const option = document.createElement("option");
+                option.value = item.narasi; // Simpan narasi sebagai value
+                option.textContent = stripHtml(item.kode); // Tampilkan kode sebagai teks
+                narationSelect.appendChild(option);
+            });
+
+            // Set default description sesuai dengan narasi pertama
+            document.getElementById("description").innerHTML = "pilih kode narasi terlebih dahulu";
+        }
+
+        // Tambahkan event listener ke <select id="naration">
+        narationSelect.onchange = function () {
+            const selectedNarasi = this.value;
+            // document.getElementById("description").innerHTML = selectedNarasi;
+            // document.getElementById("description").value = stripHtml(selectedNarasi);
+            // document.getElementById("description").value = htmlToPlainText(selectedNarasi);
+            document.getElementById("description").value = htmlToPlainTextWithCustomLink(selectedNarasi);
+        };
     }
+
+    function stripHtml(html) {
+        const div = document.createElement("div");
+        div.innerHTML = html;
+        return div.textContent || div.innerText || "";
+    }
+
+    function htmlToPlainText(html) {
+        const div = document.createElement("div");
+        div.innerHTML = html;
+
+        // Ubah semua <br> jadi newline
+        div.querySelectorAll("br").forEach(br => br.replaceWith("\n"));
+
+        // Tambahkan newline sebelum dan sesudah <p>
+        // div.querySelectorAll("p").forEach(p => {
+        //     p.innerHTML = "\n" + p.innerHTML + "\n";
+        // });
+
+        return div.textContent || div.innerText || "";
+    }
+
+    function htmlToPlainTextWithCustomLink(html) {
+        const urlCustom = document.getElementById("url_custom").value;
+
+        const div = document.createElement("div");
+        div.innerHTML = html;
+
+        // Cari elemen dengan id='link' dan ubah isinya
+        const linkSpan = div.querySelector("#link");
+        if (linkSpan) {
+            linkSpan.textContent = urlCustom || "[Link belum digenerate]";
+        }
+
+        // Ubah <br> jadi newline
+        div.querySelectorAll("br").forEach(br => br.replaceWith("\n"));
+
+        return div.textContent || div.innerText || "";
+    }
+
 
     function closeModal() {
         document.getElementById("modalAdd").classList.add("hidden");
@@ -249,11 +339,15 @@
 
         const url_custom = document.getElementById("url_custom").value;
 
+        // console.log(description)
+        // return
+        
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         fetch("/traping-urls-monitoring", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": '{{ csrf_token() }}'
+                    "X-CSRF-TOKEN": csrfToken
                 },
                 body: JSON.stringify({
                     target_id,
@@ -357,5 +451,17 @@
             }
         }
     });
+</script>
+<script>
+    function copyToClipboard(element) {
+        const text = element.innerText;
+
+        // Copy ke clipboard
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Teks berhasil disalin!");
+        }).catch(err => {
+            console.error("Gagal menyalin teks: ", err);
+        });
+    }
 </script>
 @endsection

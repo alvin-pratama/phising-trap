@@ -14,5 +14,6 @@ class PhisingTrapMode extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'name',
+        'desc'
     ];
 }

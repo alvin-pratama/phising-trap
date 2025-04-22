@@ -44,7 +44,7 @@ class TrapingUrlMonitoringController extends Controller
         $request->validate([
             'target_id' => 'required|string|max:255',
             // 'title' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'required|string',
             'short_link_service_id' => 'required|exists:short_link_service,id',
             'url_source' => 'required|url',
             'url_custom' => 'required|url',

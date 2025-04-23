@@ -413,8 +413,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     // Ambil data dari Laravel (dikonversi ke format JS)
-    // const tumData = @json($tum);
-    const tumData = JSON.parse(container.dataset.tum);
+    const tumData = @json($tum);
+    // const tumData = JSON.parse(container.dataset.tum);
 
     // Ambil label dan value dari data
     const labels = tumData.map(item => formatDate(item.created_at));

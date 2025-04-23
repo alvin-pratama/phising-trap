@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('phising_trap_modes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('desc');
             $table->timestamps();
             $table->softDeletes();
         });

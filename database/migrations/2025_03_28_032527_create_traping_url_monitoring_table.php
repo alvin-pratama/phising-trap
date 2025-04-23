@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('target_id');
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->integer('short_link_service_id');
             $table->integer('phising_trap_mode_id');
             $table->string('url_source');

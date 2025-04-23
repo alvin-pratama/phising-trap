@@ -19,7 +19,7 @@
                     <th class="border border-gray-300 px-4 py-2 text-left">#</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Mode</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Deskripsi</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Halaman</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left hidden">Halaman</th>
                 </tr>
             </thead>
             <tbody id="trapingTable">
@@ -110,7 +110,7 @@
                         <td class="border border-gray-300 px-4 py-2">${index + 1}</td>
                         <td class="border border-gray-300 px-4 py-2">${item.title}</td>
                         <td class="border border-gray-300 px-4 py-2">${item.description}</td>
-                        <td class="border border-gray-300 px-4 py-2">${item.url_source}</td>
+                        <td class="border border-gray-300 px-4 py-2 hidden">${item.url_source}</td>
                     </tr>`;
                 });
 

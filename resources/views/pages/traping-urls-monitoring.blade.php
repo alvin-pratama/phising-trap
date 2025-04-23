@@ -84,6 +84,10 @@
                     <input type="url" id="url_custom" class="w-full border px-3 py-2 rounded mt-1 bg-gray-200" readonly placeholder="click generate random url button" required>
                 </label>
                 <label class="block mt-4">
+                    <span class="text-gray-700">URL Shorted</span>
+                    <input type="url" id="url_short" class="w-full border px-3 py-2 rounded mt-1 bg-gray-200" required placeholder="click generate random url button" readonly>
+                </label>
+                <label class="block mt-4">
                     <span class="text-gray-700">Mode Jebakan</span>
                     <select id="ptm" class="w-full border px-3 py-2 rounded mt-1" onchange="change()" required>
                         <option value=''>- Pilih -</option>
@@ -222,6 +226,20 @@
 
         // set to documment.getElementById("url_custom").value
         document.getElementById("url_custom").value = fullUrl; // Set nilai ke input
+
+        fetch("/generate?link=" + fullUrl, {
+                method: "GET",
+            })
+            .then(response => response.text())
+            .then(shortUrl => {
+                if (shortUrl) {
+                    console.log("Short URL:", shortUrl);
+                    document.getElementById("url_short").value = shortUrl;
+                } else {
+                    alert("Gagal generate short link.");
+                }
+            })
+            .catch(error => console.error("Error:", error));
     }
 
     function change() {
@@ -294,7 +312,7 @@
     }
 
     function htmlToPlainTextWithCustomLink(html) {
-        const urlCustom = document.getElementById("url_custom").value;
+        const urlCustom = document.getElementById("url_short").value;
 
         const div = document.createElement("div");
         div.innerHTML = html;
@@ -339,6 +357,8 @@
 
         const url_custom = document.getElementById("url_custom").value;
 
+        const url_short = document.getElementById("url_short").value;
+
         // console.log(description)
         // return
         
@@ -357,15 +377,16 @@
                     phising_trap_mode_id,
                     url_source,
                     url_custom,
+                    url_short,
                 })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
                     closeModal();
-                    loadData();
+                    // loadData();
                     alert("Data berhasil ditambahkan.");
-                    loaction.reload();
+                    location.reload();
                 } else {
                     alert("Gagal menambahkan data.");
                 }

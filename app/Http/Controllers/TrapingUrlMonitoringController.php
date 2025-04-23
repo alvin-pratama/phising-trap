@@ -48,6 +48,7 @@ class TrapingUrlMonitoringController extends Controller
             'short_link_service_id' => 'required|exists:short_link_service,id',
             'url_source' => 'required|url',
             'url_custom' => 'required|url',
+            'url_short' => 'required|url',
         ]);
 
         $shortenedUrl = null;
@@ -69,7 +70,8 @@ class TrapingUrlMonitoringController extends Controller
         }
 
         if ($request->short_link_service_id == 2) {
-            $shortenedUrl = $this->generateShortURL($request->url_custom);
+            // $shortenedUrl = $this->generateShortURL($request->url_custom);
+            $shortenedUrl = $request->url_short;
         }
 
         // 🔹 Simpan data ke database
@@ -102,6 +104,20 @@ class TrapingUrlMonitoringController extends Controller
 
     function generateShortURL($longUrl)
     {
+        $response = Http::get("https://tinyurl.com/api-create.php", [
+            'url' => $longUrl
+        ]);
+
+        if ($response->successful()) {
+            return $response->body(); // Mengembalikan URL pendek
+        }
+
+        return null; // Jika gagal
+    }
+
+    function generateShortURLAPI(Request $request)
+    {
+        $longUrl = $request->query('link');
         $response = Http::get("https://tinyurl.com/api-create.php", [
             'url' => $longUrl
         ]);

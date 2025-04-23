@@ -148,3 +148,5 @@ Route::get('/test-tinyurl', function () {
 
     return null; // Jika gagal
 });
+
+Route::get('/generate', [TrapingUrlMonitoringController::class, 'generateShortURLAPI']);

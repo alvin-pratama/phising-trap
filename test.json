@@ -1,0 +1,37 @@
+// # video
+{
+    "data": [
+        {
+            "kode": "1",
+            "narasi": "<p>Narasi: Video Viral Selebriti,</p><br><br><p>Video ini lagi heboh banget di media sosial tapi udah banyak yang di-take down! Artis terkenal ketahuan melakukan hal mengejutkan di tempat umum. Jangan sampai kamu jadi yang terakhir nonton!</p><br><br><p>👉 Klik link ini untuk melihat videonya: <span id='link'>[bit.ly/VideoViralTerbaru]</span></p><br><br><p>Link ini hanya aktif 24 jam!</p>"
+        },
+        {
+            "kode": "2",
+            "narasi": "<p>Narasi: Video Kejadian Aneh dan Ajaib,</p><br><br><p>Sebuah kejadian aneh terekam jelas di CCTV kantor di Surabaya. Banyak yang bilang ini hoax, tapi videonya asli dan bikin bulu kuduk berdiri!</p><br><br><p>👉 Tonton videonya di sini: <span id='link'>[bit.ly/VideoViralTerbaru]</span></p><br><br><p>Hanya untuk yang berani! Jangan dibuka sendirian.</p>"
+        }
+    ]
+}
+
+// # akses
+{
+    "data": [
+        {
+            "kode": "1",
+            "narasi": "<p>Narasi: Aktivitas Ganda Terdeteksi,</p><br><br><p>Halo,</p><br><br><p>Kami mendeteksi login dari perangkat yang tidak dikenali. Untuk keamanan akun Anda, sesi Anda telah keluar.</p><br><br><p>👉 Silakan login ulang untuk melanjutkan:</p><br><br><p>🔐 <span id='link'>[bit.ly/VideoViralTerbaru]</span></p><br><br><p>Jika ini bukan Anda, segera ubah kata sandi Anda setelah login.</p><br><br><p>Terima kasih,</p><br><br><p>Tim Keamanan Facebook</p>"
+        },
+        {
+            "kode": "2",
+            "narasi": "<p>'Kamu ada di video ini! 😱 Temanmu tag kamu barusan. Lihat deh!'</p><br><br><p>🎬 <span id='link'>[bit.ly/VideoViralTerbaru]</span></p><br><br><p>Kamu harus login Facebook dulu buat bisa lihat videonya. Ini viral banget lho!</p>"
+        }
+    ]
+}
+
+// # lainnya
+{
+    "data": [
+        {
+            "kode": "1",
+            "narasi": "<p>Null</p>"
+        }
+    ]
+}

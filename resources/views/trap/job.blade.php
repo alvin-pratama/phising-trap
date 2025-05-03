@@ -8,17 +8,25 @@
     <script src="/tailwind.js"></script>
 </head>
 
-<body class="relative bg-cover bg-center min-h-screen flex items-center justify-center p-4" style="background-image: url('/pabrik.jpg');">
+<body class="relative bg-center min-h-screen flex items-center justify-center p-4" style="background-image: url('/cpns.jpg');">
     <div class="absolute inset-0 bg-white/75"></div>
     <div class="relative z-10 bg-white p-2 rounded-lg shadow-lg w-full max-w-2xl">
         <div class="p-6">
             <div class="text-center mb-6">
                 <img src="/Google_Forms_logo_(2014-2020).svg.png" alt="Logo Perusahaan" class="mx-auto h-16">
-                <h1 class="text-2xl font-bold mt-2">Nama Perusahaan</h1>
-                <p class="text-gray-600">Deadline: <span class="font-semibold">30 Maret 2025</span></p>
+                <h1 class="text-2xl font-bold mt-2">FORM PENDAFTARAN PENDATAAN AWAL CASN 2025 MOJOKERTO</h1>
+                <p class="text-gray-600">Deadline: <span class="font-semibold">21 Mei 2025</span></p>
             </div>
 
-            <p class="bg-gray-100 p-4">Hai, ini kesempatan buat kamu loh.. <br>Buruan lengkapi datamu segera disini, mari bergabung bersama kami, Kuota Terbatas 500 pendaftar.</p>
+            <!-- <p class="bg-gray-100 p-4">Hai, ini kesempatan buat kamu loh.. <br>Buruan lengkapi datamu segera disini, mari bergabung bersama kami, Kuota Terbatas 500 pendaftar.</p> -->
+            <div class="bg-gray-100 p-4">
+                <p>
+                    PENGUMUMAN SELEKSI CPNS & PPPK 2025
+                </p>
+                <p>
+                    Segera lengkapi data Anda untuk mengikuti tahap awal seleksi.
+                </p>
+            </div>
             <br>
             <form id="fakeForm">
                 <div class="mb-4">
@@ -61,11 +69,6 @@
                 </div>
 
                 <div class="mb-4">
-                    <label class="block text-gray-700 font-medium">Posisi Yang Didaftar</label>
-                    <input required type="text" class="w-full p-2 border rounded" placeholder="Masukkan posisi">
-                </div>
-
-                <div class="mb-4">
                     <label class="block text-gray-700 font-medium">Pengalaman Kerja</label>
                     <textarea class="w-full p-2 border rounded" rows="3" placeholder="Jelaskan pengalaman kerja Anda"></textarea>
                 </div>
@@ -75,7 +78,6 @@
                     <input required type="file" class="w-full p-2 border rounded">
                 </div>
 
-                <p><span class="font-bold">Note</span>: Jika sudah selesai, jangan lupa kirim yak!</p>
                 <br>
                 <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition">Kirim Pendaftaran</button>
             </form>

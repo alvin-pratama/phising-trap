@@ -5,7 +5,7 @@
 <div class="bg-white shadow-md rounded-lg mt-6 p-6">
     <h2 class="text-xl font-semibold text-gray-800">Daftar Jebakan</h2>
     <p>Target: {{ $target->target }}</p>
-    <p id="count" class="mt-2 text-gray-700">Count: 0</p>
+    <!-- <p id="count" class="mt-2 text-gray-700">Count: 0</p> -->
 
     <!-- Button Add -->
     <button onclick="history.back()"
@@ -15,7 +15,7 @@
 
     <button onclick="openModal()"
         class="my-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 shadow-lg">
-        + Tambah Jebakan
+        Tambah Jebakan
     </button>
 
     <!-- Table Wrapper -->
@@ -48,7 +48,7 @@
 
 <!-- Card 2 -->
 <div class="bg-white shadow-md rounded-lg mt-6 p-6">
-    <h2 class="text-xl font-semibold text-gray-800">Grafik Jebakan</h2>
+    <h2 class="text-xl font-semibold text-gray-800">Tren Jumlah Pengguna Terjebak</h2>
 
     <!-- <p>{{ $tum }}</p> -->
     <div style="max-width: 100%; width: 90%; overflow-x: auto;">
@@ -60,7 +60,7 @@
 <div id="modalAdd" class="hidden">
     <div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
         <div class="bg-white rounded-lg shadow-lg p-6 w-full md:max-w-xl">
-            <h2 class="text-xl font-semibold text-gray-800">Tambah Traping URL</h2>
+            <h2 class="text-xl font-semibold text-gray-800">Tambah Jebakan</h2>
             <form id="addForm">
                 <label class="mt-4 hidden">
                     <span class="text-gray-700">Target</span>
@@ -78,17 +78,17 @@
                 </label>
                 <label class="block mt-4">
                     <div class="flex flex-row gap-2 items-center">
-                        <span class="text-gray-700">URL</span>
-                        <span class="text-sm bg-blue-600 text-white px-2 py-1 rounded shadow-md hover:bg-blue-700 cursor-pointer" onclick="generateRandomURL()">Generate Random URL</span>
+                        <span class="text-gray-700">Link</span>
+                        <span class="text-sm bg-blue-600 text-white px-2 py-1 rounded shadow-md hover:bg-blue-700 cursor-pointer" onclick="generateRandomURL()">Generate</span>
                     </div>
-                    <input type="url" id="url_custom" class="w-full border px-3 py-2 rounded mt-1 bg-gray-200" readonly placeholder="click generate random url button" required>
+                    <input type="url" id="url_custom" class="w-full border px-3 py-2 rounded mt-1 bg-gray-200" readonly placeholder="Klik tombol generate" required>
                 </label>
                 <label class="block mt-4">
-                    <span class="text-gray-700">URL Shorted</span>
-                    <input type="url" id="url_short" class="w-full border px-3 py-2 rounded mt-1 bg-gray-200" required placeholder="click generate random url button" readonly>
+                    <span class="text-gray-700">Shortened Link</span>
+                    <input type="url" id="url_short" class="w-full border px-3 py-2 rounded mt-1 bg-gray-200" required placeholder="Klik tombol generate" readonly>
                 </label>
                 <label class="block mt-4">
-                    <span class="text-gray-700">Mode Jebakan</span>
+                    <span class="text-gray-700">Modus Jebakan</span>
                     <select id="ptm" class="w-full border px-3 py-2 rounded mt-1" onchange="change()" required>
                         <option value=''>- Pilih -</option>
                         @foreach ($ptm as $item)
@@ -97,14 +97,14 @@
                     </select>
                 </label>
                 <label class="block mt-4">
-                    <span class="text-gray-700">Pilih Kode Narasi</span>
+                    <span class="text-gray-700">Pilih Narasi</span>
                     <select id="naration" class="w-full border px-3 py-2 rounded mt-1" onchange="change()" required>
                         <option value=''>- Pilih -</option>
                     </select>
                 </label>
                 <label class="block mt-4">
                     <span class="text-gray-700">Narasi</span>
-                    <textarea id="description" class="w-full border px-3 py-2 rounded mt-1 bg-gray-100" placeholder="data masih kosong" required rows="10" readonly></textarea>
+                    <textarea id="description" class="w-full border px-3 py-2 rounded mt-1 bg-gray-100" placeholder="Pilih Narasi" required rows="7" readonly></textarea>
                 </label>
                 <div class="flex justify-end mt-4">
                     <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Tutup</button>
@@ -272,12 +272,12 @@
             descData.data.forEach(item => {
                 const option = document.createElement("option");
                 option.value = item.narasi; // Simpan narasi sebagai value
-                option.textContent = stripHtml(item.kode); // Tampilkan kode sebagai teks
+                option.textContent = stripHtml(item.judul); // Tampilkan kode sebagai teks
                 narationSelect.appendChild(option);
             });
 
             // Set default description sesuai dengan narasi pertama
-            document.getElementById("description").innerHTML = "pilih kode narasi terlebih dahulu";
+            document.getElementById("description").innerHTML = "pilih narasi terlebih dahulu";
         }
 
         // Tambahkan event listener ke <select id="naration">

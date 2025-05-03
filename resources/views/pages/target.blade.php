@@ -4,12 +4,12 @@
 <!-- Card -->
 <div class="bg-white shadow-md rounded-lg mt-6 p-6">
     <h2 class="text-xl font-semibold text-gray-800">Target Jebakan</h2>
-    <p id="count" class="mt-2 text-gray-700">Count: 0</p>
+    <!-- <p id="count" class="mt-2 text-gray-700">Count: 0</p> -->
 
     <!-- Button Add -->
     <button onclick="openAddModal()"
         class="my-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 shadow-lg">
-        + Tambah Target
+        Tambah Target
     </button>
 
     <!-- Table Wrapper -->
@@ -19,7 +19,7 @@
                 <tr class="bg-gray-200">
                     <th class="border border-gray-300 px-4 py-2 text-left">#</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Target</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Rencana Total Target</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Jumlah Target</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Aksi</th>
                 </tr>
             </thead>
@@ -49,7 +49,7 @@
             </div>
 
             <div class="mt-4">
-                <label class="block text-gray-700">Rencana Total Target</label>
+                <label class="block text-gray-700">Perkiraan Jumlah Target</label>
                 <input type="number" id="add_count_target" class="w-full border px-3 py-2 rounded mt-1" placeholder="0" required>
             </div>
 
@@ -123,7 +123,7 @@
                             <td class="border border-gray-300 px-4 py-2">
                                 <button onclick="detailData(${target.id})"
                                     class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 shadow-lg">
-                                    Lihat
+                                    Kelola Jebakan
                                 </button>
                                 <button onclick="openEditModal(${target.id})"
                                     class="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700 shadow-lg">
